@@ -5,8 +5,8 @@
     
     <entry>
       <title>Visual Studio工程实践开发(C++)</title>
-      <link href="/post/7b14e812.html"/>
-      <url>/post/7b14e812.html</url>
+      <link href="/posts/7b14e812.html"/>
+      <url>/posts/7b14e812.html</url>
       
         <content type="html"><![CDATA[<h1 id="Visual-Studio介绍"><a href="#Visual-Studio介绍" class="headerlink" title="Visual Studio介绍"></a>Visual Studio介绍</h1><h2 id="工具介绍篇"><a href="#工具介绍篇" class="headerlink" title="工具介绍篇"></a>工具介绍篇</h2><h3 id="Visual-Studio-VS-Codeblocks-VS-Visual-Studio-Code"><a href="#Visual-Studio-VS-Codeblocks-VS-Visual-Studio-Code" class="headerlink" title="Visual Studio VS Codeblocks VS Visual Studio Code"></a>Visual Studio VS Codeblocks VS Visual Studio Code</h3><h3 id="工具安装修改简介"><a href="#工具安装修改简介" class="headerlink" title="工具安装修改简介"></a>工具安装修改简介</h3><h3 id="Visual-Studio-C-简单工程演示"><a href="#Visual-Studio-C-简单工程演示" class="headerlink" title="Visual Studio C++简单工程演示"></a>Visual Studio C++简单工程演示</h3><h2 id="工具配置篇"><a href="#工具配置篇" class="headerlink" title="工具配置篇"></a>工具配置篇</h2><h3 id="界面配置"><a href="#界面配置" class="headerlink" title="界面配置"></a>界面配置</h3><h3 id="VA配置"><a href="#VA配置" class="headerlink" title="VA配置"></a>VA配置</h3><h3 id="杂项配置——字体-Tab配置-Limit"><a href="#杂项配置——字体-Tab配置-Limit" class="headerlink" title="杂项配置——字体+Tab配置+Limit"></a>杂项配置——字体+Tab配置+Limit</h3><h2 id="工具使用篇"><a href="#工具使用篇" class="headerlink" title="工具使用篇"></a>工具使用篇</h2><h3 id="应用程序工程"><a href="#应用程序工程" class="headerlink" title="应用程序工程"></a>应用程序工程</h3><h3 id="lib静态库工程"><a href="#lib静态库工程" class="headerlink" title="lib静态库工程"></a>lib静态库工程</h3><h3 id="dll动态库工程"><a href="#dll动态库工程" class="headerlink" title="dll动态库工程"></a>dll动态库工程</h3><h3 id="Linux跨平台工程"><a href="#Linux跨平台工程" class="headerlink" title="Linux跨平台工程"></a>Linux跨平台工程</h3><h3 id="编译排错篇"><a href="#编译排错篇" class="headerlink" title="编译排错篇"></a>编译排错篇</h3><h3 id="工程选项修改"><a href="#工程选项修改" class="headerlink" title="工程选项修改"></a>工程选项修改</h3><h2 id="工程组织篇"><a href="#工程组织篇" class="headerlink" title="工程组织篇"></a>工程组织篇</h2><h3 id="手动多工程组织"><a href="#手动多工程组织" class="headerlink" title="手动多工程组织"></a>手动多工程组织</h3><h3 id="cmake工程组织"><a href="#cmake工程组织" class="headerlink" title="cmake工程组织"></a>cmake工程组织</h3><h3 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h3><h2 id="代码调试篇"><a href="#代码调试篇" class="headerlink" title="代码调试篇"></a>代码调试篇</h2><h3 id="常用调试手段"><a href="#常用调试手段" class="headerlink" title="常用调试手段"></a>常用调试手段</h3><h3 id="断点篇"><a href="#断点篇" class="headerlink" title="断点篇"></a>断点篇</h3><h3 id="多线程调试"><a href="#多线程调试" class="headerlink" title="多线程调试"></a>多线程调试</h3><h3 id="性能内存监视"><a href="#性能内存监视" class="headerlink" title="性能内存监视"></a>性能内存监视</h3><h3 id="远程调试"><a href="#远程调试" class="headerlink" title="远程调试"></a>远程调试</h3><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul><li><p><strong>学习和参考的资料来源</strong>：</p><p>  <a href="https://www.bilibili.com/video/BV1S541137P2/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&vd_source=1c8b0af391894cdb44e3942161a1de4f">Visual Studio工程实践开发(C++)</a></p><p>  <a href="https://www.bilibili.com/video/BV1Xt411g7jT/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&vd_source=1c8b0af391894cdb44e3942161a1de4f">vs2022(Visual Studio 2022)权威指南&amp;&amp;C语言&amp;&amp;软件工程开发的方向&amp;&amp;技巧要领</a></p><p>  Tanks-1992版权声明：源代码来源为：<a href="https://github.com/krystiankaluzny/Tanks">Tanks</a></p></li></ul>]]></content>
       
@@ -36,8 +36,8 @@
     
     <entry>
       <title>vscode配置c++工作区</title>
-      <link href="/post/9a0efe1e.html"/>
-      <url>/post/9a0efe1e.html</url>
+      <link href="/posts/9a0efe1e.html"/>
+      <url>/posts/9a0efe1e.html</url>
       
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1>]]></content>
       
@@ -63,8 +63,8 @@
     
     <entry>
       <title>cpp演讲比赛流程管理系统</title>
-      <link href="/post/b2eda4b5.html"/>
-      <url>/post/b2eda4b5.html</url>
+      <link href="/posts/b2eda4b5.html"/>
+      <url>/posts/b2eda4b5.html</url>
       
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="演讲比赛程序需求"><a href="#演讲比赛程序需求" class="headerlink" title="演讲比赛程序需求"></a>演讲比赛程序需求</h1><h1 id="项目创建"><a href="#项目创建" class="headerlink" title="项目创建"></a>项目创建</h1>]]></content>
       
@@ -90,8 +90,8 @@
     
     <entry>
       <title>my new post</title>
-      <link href="/post/c8ad3605.html"/>
-      <url>/post/c8ad3605.html</url>
+      <link href="/posts/c8ad3605.html"/>
+      <url>/posts/c8ad3605.html</url>
       
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script>]]></content>
       
@@ -103,8 +103,8 @@
     
     <entry>
       <title>Hello World</title>
-      <link href="/post/4a17b156.html"/>
-      <url>/post/4a17b156.html</url>
+      <link href="/posts/4a17b156.html"/>
+      <url>/posts/4a17b156.html</url>
       
         <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
