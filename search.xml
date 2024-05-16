@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>pytorch一键导出环境</title>
+      <link href="/posts/308b9800.html"/>
+      <url>/posts/308b9800.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><p>requirements.txt 文件是一个文本文件，用于列出你的Python项目所依赖的软件包及其版本。</p><p><strong>生成requirements.txt的方式</strong></p><ol><li>直接使用pip freeze命令生成requirements.txt文件：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure><p>然后你会发现requirements.txt文件里有好多好多的包，因为他是把你环境里所有的包都列出来了，不管他们对你的项目有没有影响</p><p>所以这个方法更适合于为该项目创建了的单虚拟环境下运行</p><p>安装requirements.txt 里面依赖的包：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><ol start="2"><li>pipreqs</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装pipreqs</span></span><br><span class="line">pip install pipreqs</span><br><span class="line"><span class="comment"># 生成 requirements.txt</span></span><br><span class="line">pipreqs ./</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">pipreqs . --encoding=utf8 --force<span class="comment">#在当前目录下生成</span></span><br></pre></td></tr></table></figure><p>–encoding&#x3D;utf8 为使用utf8编码</p><p>–force 强制执行，当生成目录下的requirements.txt存在时覆盖</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java</title>
       <link href="/posts/7f1ae6d2.html"/>
       <url>/posts/7f1ae6d2.html</url>
