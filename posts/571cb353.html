@@ -1,11 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>嵌入式项目1 | 比宇宙更加遥远的地方</title><meta name="author" content="一颗流浪小石头"><meta name="copyright" content="一颗流浪小石头"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式项目1">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>webserver | 比宇宙更加遥远的地方</title><meta name="author" content="一颗流浪小石头"><meta name="copyright" content="一颗流浪小石头"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基础知识 TCP  http协议  Linux网络编程   WebServer简介和功能梳理WebServer，或者网络服务器，是一种专门用来处理互联网或内部网络中请求的服务器。 简单来说，当你在浏览器中输入一个网址时，背后就是WebServer在工作，它负责接收你的请求，处理这个请求，然后把网页的内容发送回你的电脑或手机上。 以Nginx为例，这是一种非常流行的WebServer软件。它之所以广">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webserver">
 <meta property="og:url" content="http://lejunxts.github.io/posts/571cb353.html">
 <meta property="og:site_name" content="比宇宙更加遥远的地方">
+<meta property="og:description" content="基础知识 TCP  http协议  Linux网络编程   WebServer简介和功能梳理WebServer，或者网络服务器，是一种专门用来处理互联网或内部网络中请求的服务器。 简单来说，当你在浏览器中输入一个网址时，背后就是WebServer在工作，它负责接收你的请求，处理这个请求，然后把网页的内容发送回你的电脑或手机上。 以Nginx为例，这是一种非常流行的WebServer软件。它之所以广">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://lejunxts.github.io/img/fulilian2.jpg">
 <meta property="article:published_time" content="2024-02-29T05:16:18.000Z">
-<meta property="article:modified_time" content="2024-03-04T13:13:49.291Z">
+<meta property="article:modified_time" content="2024-07-19T14:30:18.890Z">
 <meta property="article:author" content="一颗流浪小石头">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://lejunxts.github.io/img/fulilian2.jpg"><link rel="shortcut icon" href="/img/meigui-0.jpg"><link rel="canonical" href="http://lejunxts.github.io/posts/571cb353.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
@@ -48,12 +50,12 @@
   },
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '嵌入式项目1',
+  title: 'webserver',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2024-03-04 21:13:49'
+  isToc: true,
+  postUpdate: '2024-07-19 22:30:18'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -150,7 +152,398 @@
         }
       }
       detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-tv"></i><span> 动画</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/fulilian2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="比宇宙更加遥远的地方"><span class="site-name">比宇宙更加遥远的地方</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-tv"></i><span> 动画</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">嵌入式项目1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-29T05:16:18.000Z" title="发表于 2024-02-29 13:16:18">2024-02-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-04T13:13:49.291Z" title="更新于 2024-03-04 21:13:49">2024-03-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">0</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="嵌入式项目1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://lejunxts.github.io">一颗流浪小石头</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://lejunxts.github.io/posts/571cb353.html">http://lejunxts.github.io/posts/571cb353.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://lejunxts.github.io" target="_blank">比宇宙更加遥远的地方</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/fulilian2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/ce15e2e9.html" title="嵌入式项目2"><img class="cover" src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">嵌入式项目2</div></div></a></div><div class="next-post pull-right"><a href="/posts/32d9f9cf.html" title="设计模式"><img class="cover" src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">设计模式</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Gitalk</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">一颗流浪小石头</div><div class="author-info__description">总有一天，要在那里看到星星！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lejunXTS"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/lejunXTS" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.bilibili.com/" target="_blank" title="bilibili"><i class="fab fa-bilibili"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">循此苦旅，以达繁星</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/308b9800.html" title="pytorch一键导出环境"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pytorch一键导出环境"/></a><div class="content"><a class="title" href="/posts/308b9800.html" title="pytorch一键导出环境">pytorch一键导出环境</a><time datetime="2024-05-16T14:19:54.000Z" title="发表于 2024-05-16 22:19:54">2024-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7f1ae6d2.html" title="java"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java"/></a><div class="content"><a class="title" href="/posts/7f1ae6d2.html" title="java">java</a><time datetime="2024-04-29T01:51:22.000Z" title="发表于 2024-04-29 09:51:22">2024-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/593dfc4f.html" title="后端项目3"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端项目3"/></a><div class="content"><a class="title" href="/posts/593dfc4f.html" title="后端项目3">后端项目3</a><time datetime="2024-02-29T05:16:44.000Z" title="发表于 2024-02-29 13:16:44">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2e3accd9.html" title="后端项目2"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端项目2"/></a><div class="content"><a class="title" href="/posts/2e3accd9.html" title="后端项目2">后端项目2</a><time datetime="2024-02-29T05:16:39.000Z" title="发表于 2024-02-29 13:16:39">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b7339d63.html" title="Git"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/posts/b7339d63.html" title="Git">Git</a><time datetime="2024-02-29T05:16:34.000Z" title="发表于 2024-02-29 13:16:34">2024-02-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 一颗流浪小石头</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="APlayer.min.css"><div id="aplayer"></div><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js" async></script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-tv"></i><span> 动画</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/fulilian2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="比宇宙更加遥远的地方"><span class="site-name">比宇宙更加遥远的地方</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-tv"></i><span> 动画</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">webserver</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-29T05:16:18.000Z" title="发表于 2024-02-29 13:16:18">2024-02-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-19T14:30:18.890Z" title="更新于 2024-07-19 22:30:18">2024-07-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="webserver"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><ol>
+<li><p>TCP</p>
+</li>
+<li><p>http协议</p>
+</li>
+<li><p>Linux网络编程</p>
+</li>
+</ol>
+<h2 id="WebServer简介和功能梳理"><a href="#WebServer简介和功能梳理" class="headerlink" title="WebServer简介和功能梳理"></a>WebServer简介和功能梳理</h2><p>WebServer，或者网络服务器，是一种专门用来处理互联网或内部网络中请求的服务器。</p>
+<p>简单来说，当你在浏览器中输入一个网址时，背后就是WebServer在工作，它负责接收你的请求，处理这个请求，然后把网页的内容发送回你的电脑或手机上。</p>
+<p>以Nginx为例，这是一种非常流行的WebServer软件。它之所以广泛使用，主要是因为它处理高并发请求非常高效，即能同时处理成千上万个网络请求。</p>
+<p>Nginx常用于提供静态资源如图片、CSS样式文件和JavaScript文件，也可以作为代理服务器，转发对动态资源的请求到其他服务器（这个过程类似于网关）。</p>
+<p>WebServer的功能非常强大，它不仅能处理网页内容的分发，还可以进行安全控制、请求转发、负载均衡等。</p>
+<p><strong>在这些处理过程中，涉及到的机制包括：</strong></p>
+<p>HTTP协议处理：这是Web服务器处理的核心，用于理解和响应浏览器或其他客户端发来的HTTP请求。</p>
+<p>内容缓存：为了提高响应速度，Web服务器可以缓存频繁请求的内容，这样在下一次同样的请求到来时可以直接响应，不需要重新生成。</p>
+<p>负载均衡：当服务器的请求量非常大时，Web服务器可以将请求分发到多台服务器上，这样可以避免单一服务器过载，提高整体处理能力。</p>
+<p>安全功能：例如SSL加密，保证数据传输的安全性。</p>
+<p>总的来说，WebServer是网络应用中不可或缺的一部分，它使得网络信息的获取变得快速和高效。</p>
+<h2 id="实现一个简单的WebServer"><a href="#实现一个简单的WebServer" class="headerlink" title="实现一个简单的WebServer"></a>实现一个简单的WebServer</h2><p>WebServer最核心的功能就是<strong>HTTP协议处理</strong>，只要能进行HTTP协议处理，就是一个WebServer。</p>
+<p>最终目标是实现一个能高效处理HTTP协议的WebServer，其应可以同时处理大量的并发请求，并尽量减少对系统资源的消耗。</p>
+<p>先从一个最简单的WebServer开始，后续再逐步扩展，逐渐实现一个高效的、可配置的WebServer。</p>
+<p>简单来说，要先实现一个单线程的、只支持处理一个连接的WebServer，这个WebServer 能处理基于HTTP&#x2F;1.0的简单请求。</p>
+<p>具体来说： </p>
+<pre><code>这个WebServer应该至少能管理一个网站，一个网站可能有多个网页组成，所以管理的对象应该是一个文件夹。  
+
+这个WebServer应该至少监听一个固定的端口，用来接受客户端连接。 
+
+这个WebServer应该至少支持HTTP/1.0的大部分请求方法。（HTTP/1.0 支持的请求方法包括GET、POST、PUT、DELETE、TRACE。
+
+这个WebServer应该能够返回标准的HTTP响应，告知客户端处理的结果。 
+</code></pre>
+<h2 id="扩充"><a href="#扩充" class="headerlink" title="扩充"></a>扩充</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>其实多线程&#x2F;多进程无非就是pthread_creater&#x2F;fork而已,但是需要考虑的东西也就更多了,例如临界区&#x2F;竞态条件race condition, 考虑到这个, 又要用一些进程间的通信原语去解决问题,例如mutex cond&#x2F;pipe sig shm, 然后使用这些又需要注意很多地方 死锁&#x2F;临界区，一些内存已经不存在而在其他线程中要被使用</p>
+<p>所有线程共享其所属进程的资源，如内存空间、文件描述符和系统资源，这些资源都是由进程统一管理和调度的</p>
+<p>每个线程也有一些专属的资源</p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1774157245946933248">https://www.zhihu.com/column/c_1774157245946933248</a></p>
+<p>简单的方案已经用简单的计时器解决了超时控制的问题，但是终究各管各的，而且未来我们的 WebServer 还要扩展更多的功能，可能也要用到计时功能。</p>
+<p>一个一个去实现单独的计时器的做法也许可行，但是看起来毕竟很简陋。</p>
+<p>我们要打造一个独立于工作线程、稳定、专业计时的工具，主线程还有其他工作要办，于是我们可以建立一个专门的计时线程。</p>
+<p>建立计时线程，首先要分析其应当实现的功能。不是所有的线程都需要计时信息，所以计时器不能给所有线程都发通知，这很浪费不可取。因此计时线程要记录，记录要给哪些线程发通知。</p>
+<p>需要计时器的通知信息的线程可能会增多，可能会减少，所以要允许它们 既可以订阅，也可以取消订阅。</p>
+<p>计时线程并不知道到底会有多少个线程将来要订阅它的通知，所以它还要具备良好的可扩展性，能支持大量的线程订阅其信息。计时线程作为发布者通知到订阅者，一个计时周期已经到了。</p>
+<p>因此，<strong>双向链表</strong>就以其高效的插入、删除操作和可扩展性成为我们建立计时线程理想的数据结构。</p>
+<p><strong>小根堆</strong></p>
+<p>小根堆（Min-Heap）是一种特殊的完全二叉树，其每个节点的值都不大于其子节点的值。这种属性确保了树的根节点始终是所有元素中的最小值，这就是小根堆的最大优势：能够快速（在常数时间，即O(1)的时间复杂度内）访问到最小元素。</p>
+<p>小根堆的主要操作：</p>
+<p>插入操作（Insert） - 将新元素添加到堆的末端，然后通过一系列的向上调整（自下而上的调整，也称为上浮操作）保持小根堆的性质。这个操作的时间复杂度是O(log n)，其中n是堆中元素的数量。 </p>
+<p>删除最小元素（Extract Min） - 删除根节点（即最小元素），通常通过将最后一个元素移动到根位置，然后进行自上而下的调整（下沉操作）来恢复堆的性质。这个操作的时间复杂度也是O(log n)。 </p>
+<p>构建小根堆（Build Min Heap） - 将一个无序数组转化为小根堆的过程。可以通过从最后一个非叶子节点开始，逐个执行下沉操作来实现。这个过程的时间复杂度是O(n)。 </p>
+<p>小根堆的应用：优先队列 - 小根堆常用于实现优先队列，其中队列的最高优先级对应于最小元素。这使得任务调度、事件管理等应用中，可以快速地处理最紧急的任务或事件。</p>
+<p>堆排序 - 利用堆结构进行的一种有效的排序方法，特别是在需要不断调整数据集中最小或最大值时非常高效。</p>
+<p>小根堆的真正优势在于它能够提供快速的访问到最小元素的能力，这对于很多需要频繁查询最小值的场景非常关键。同时，它还支持相对高效的插入和删除最小值的操作，使得大量的且动态变化的数据集的管理变得更加高效。</p>
+<p>使用小根堆作为连接池的排序结构</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>线程池是一种通过预创建线程的方式，来管理和优化多线程程序性能的技术。</p>
+<p>在多线程编程中，频繁地创建和销毁线程会带来较大的性能开销，因为每个线程的创建和销毁都涉及到操作系统的资源分配和回收。</p>
+<p>线程池通过创建一定数量的线程，并将它们保持在待命状态，可以快速响应新的任务请求。</p>
+<p>当一个任务到来时，线程池会从中选择一个空闲的线程去执行任务，执行完毕后，这个线程不会被销毁，而是返回到线程池中，等待执行下一个任务。</p>
+<p>这种方式减少了线程创建和销毁的次数，提高了响应速度，降低了资源消耗。</p>
+<p>线程池通常包含以下几个主要组件： </p>
+<p>工作队列：用于存放待处理的任务。 </p>
+<p>工作线程：线程池中的线程，负责执行工作队列中的任务。  </p>
+<p>线程池管理器：负责管理线程池的创建、任务分配、线程同步和销毁等。</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>查看服务器是否在监听</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">netstat -tuln | grep 8888</span><br></pre></td></tr></table></figure>
+
+<p>查看具体哪个进程占用了端口</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo lsof -i :8080</span><br></pre></td></tr></table></figure>
+
+<h1 id="一些错误"><a href="#一些错误" class="headerlink" title="一些错误"></a>一些错误</h1><p><strong>错误代码说明</strong></p>
+<p>400 Bad Request：客户端发送的请求有语法错误或格式不正确。确保请求符合 HTTP 协议标准</p>
+<p>404 Not Found：服务器无法找到请求的资源。检查服务器路径和资源文件是否正确</p>
+<h1 id="构建脚本"><a href="#构建脚本" class="headerlink" title="构建脚本"></a>构建脚本</h1><p>这个构建过程是将源代码编译成可执行文件的步骤，通常包括配置构建环境、生成构建文件、编译源代码和链接生成最终的可执行文件或库。以下是对这个特定构建过程的详细解释：</p>
+<h2 id="1-设置变量"><a href="#1-设置变量" class="headerlink" title="1. 设置变量"></a>1. 设置变量</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">+ <span class="built_in">pwd</span></span><br><span class="line">+ SOURCE_DIR=/home/asus/ly/cpp/WebServer</span><br><span class="line">+ BUILD_DIR=../build</span><br><span class="line">+ BUILD_TYPE=Debug</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>pwd</code>：打印当前工作目录。</li>
+<li><code>SOURCE_DIR</code>：源代码目录，位于 <code>/home/asus/ly/cpp/WebServer</code>。</li>
+<li><code>BUILD_DIR</code>：构建目录，设置为相对于源代码目录的 <code>../build</code>。</li>
+<li><code>BUILD_TYPE</code>：构建类型，设置为 <code>Debug</code>，意味着生成的可执行文件包含调试信息，有助于调试。</li>
+</ul>
+<h2 id="2-创建并切换到构建目录"><a href="#2-创建并切换到构建目录" class="headerlink" title="2. 创建并切换到构建目录"></a>2. 创建并切换到构建目录</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">+ <span class="built_in">mkdir</span> -p ../build/Debug</span><br><span class="line">+ <span class="built_in">cd</span> ../build/Debug</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>mkdir -p ../build/Debug</code>：创建构建目录及其父目录（如果不存在）。</li>
+<li><code>cd ../build/Debug</code>：切换到构建目录。</li>
+</ul>
+<h2 id="3-生成构建文件"><a href="#3-生成构建文件" class="headerlink" title="3. 生成构建文件"></a>3. 生成构建文件</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">+ cmake -DCMAKE_BUILD_TYPE=Debug /home/asus/ly/cpp/WebServer</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>cmake</code> 命令生成构建文件。</li>
+<li><code>-DCMAKE_BUILD_TYPE=Debug</code>：指定构建类型为 <code>Debug</code>。</li>
+<li><code>/home/asus/ly/cpp/WebServer</code>：源代码目录。</li>
+</ul>
+<p>CMake 将读取源代码目录中的 <code>CMakeLists.txt</code> 文件，根据配置生成适合目标平台的构建文件（例如 Makefile）。</p>
+<h2 id="4-编译源代码"><a href="#4-编译源代码" class="headerlink" title="4. 编译源代码"></a>4. 编译源代码</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">+ make</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>make</code>：根据 CMake 生成的构建文件，编译源代码。</li>
+</ul>
+<h2 id="编译输出"><a href="#编译输出" class="headerlink" title="编译输出"></a>编译输出</h2><h3 id="CMake-配置"><a href="#CMake-配置" class="headerlink" title="CMake 配置"></a>CMake 配置</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">-- The CXX compiler identification is GNU 11.3.0</span><br><span class="line">-- Detecting CXX compiler ABI info</span><br><span class="line">...</span><br><span class="line">-- Build files have been written to: /home/asus/ly/cpp/build/Debug</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CMake 识别出使用的 C++ 编译器是 GNU 11.3.0。</li>
+<li>检测并确认编译器的功能和特性。</li>
+<li>生成构建文件并写入构建目录。</li>
+</ul>
+<h3 id="编译和链接"><a href="#编译和链接" class="headerlink" title="编译和链接"></a>编译和链接</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[  4%] Building CXX object WebServer/base/CMakeFiles/libserver_base.dir/AsyncLogging.cpp.o</span><br><span class="line">...</span><br><span class="line">[100%] Built target HTTPClient</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>make</code> 逐步编译各个源文件，并显示编译进度。</li>
+<li>每一行输出表示正在编译一个源文件，例如 <code>AsyncLogging.cpp</code>，生成对应的目标文件（<code>.o</code> 文件）。</li>
+<li>目标文件链接成静态库 <code>libserver_base.a</code> 或可执行文件 <code>WebServer</code> 和 <code>HTTPClient</code>。</li>
+</ul>
+<h3 id="警告信息"><a href="#警告信息" class="headerlink" title="警告信息"></a>警告信息</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">In file included from /home/asus/ly/cpp/WebServer/WebServer/Channel.cpp:3:</span><br><span class="line">...</span><br><span class="line">warning: ‘Channel::lastEvents_’ will be initialized after [-Wreorder]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译过程中出现了变量初始化顺序的警告，提示代码中的变量初始化顺序与类中声明的顺序不一致。</li>
+<li>尽管这些警告不会阻止编译成功，但修复这些警告有助于提高代码质量和稳定性。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个构建过程是典型的 CMake 和 Make 编译流程，主要步骤包括：</p>
+<ol>
+<li>设置环境变量和构建目录。</li>
+<li>使用 CMake 生成构建系统（如 Makefile）。</li>
+<li>使用 Make 编译和链接源代码，生成可执行文件或库。</li>
+</ol>
+<p>这个流程自动化了编译过程，确保代码可以在不同平台上进行一致的构建。</p>
+<h1 id="总体结构分析"><a href="#总体结构分析" class="headerlink" title="总体结构分析"></a>总体结构分析</h1><p><img src="/img/loading.gif" data-original="/posts/571cb353/webserver.png"></p>
+<h1 id="服务端具体功能分析"><a href="#服务端具体功能分析" class="headerlink" title="服务端具体功能分析"></a>服务端具体功能分析</h1><p><strong>主函数</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建事件循环对象mainLoop，然后创建服务器对象myHTTPServer，传入事件循环、线程数和端口号。</span></span><br><span class="line"><span class="comment">//调用myHTTPServer.start()启动服务器，然后调用mainLoop.loop()进入事件循环。</span></span><br><span class="line">  EventLoop mainLoop;</span><br><span class="line">  <span class="function">Server <span class="title">myHTTPServer</span><span class="params">(&amp;mainLoop, threadNum, port)</span></span>;</span><br><span class="line">  myHTTPServer.<span class="built_in">start</span>();</span><br><span class="line">  mainLoop.<span class="built_in">loop</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h2><h3 id="EventLoop类分析与总结"><a href="#EventLoop类分析与总结" class="headerlink" title="EventLoop类分析与总结"></a>EventLoop类分析与总结</h3><p><code>EventLoop</code> 类是一个核心组件，用于实现基于事件驱动的编程模型。它通过 epoll 提供的高效 I&#x2F;O 多路复用机制管理事件循环。</p>
+<h4 id="具体功能和作用"><a href="#具体功能和作用" class="headerlink" title="具体功能和作用"></a>具体功能和作用</h4><h4 id="事件循环管理"><a href="#事件循环管理" class="headerlink" title="事件循环管理"></a>事件循环管理</h4><ul>
+<li><code>loop()</code> 方法启动事件循环，不断监听和处理 I&#x2F;O 事件，直到 <code>quit()</code> 方法被调用。</li>
+<li><code>quit()</code> 方法用于退出事件循环。</li>
+</ul>
+<h4 id="事件通知机制"><a href="#事件通知机制" class="headerlink" title="事件通知机制"></a>事件通知机制</h4><ul>
+<li>使用 <code>eventfd</code> 创建的文件描述符 <code>wakeupFd_</code>，配合 epoll，实现线程间的事件通知。</li>
+<li><code>wakeup()</code> 方法向 <code>wakeupFd_</code> 写入数据，以唤醒阻塞的事件循环。</li>
+<li><code>handleRead()</code> 方法从 <code>wakeupFd_</code> 读取数据，处理唤醒事件。</li>
+</ul>
+<h4 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h4><ul>
+<li>支持异步任务的调度和执行，通过 <code>runInLoop()</code> 和 <code>queueInLoop()</code> 方法实现。</li>
+<li><code>runInLoop()</code> 方法在事件循环线程中直接执行任务，如果在其他线程调用，则将任务放入队列。</li>
+<li><code>queueInLoop()</code> 方法将任务添加到待处理队列，并在需要时唤醒事件循环。</li>
+<li><code>doPendingFunctors()</code> 方法在每次循环迭代中处理所有待执行的任务。</li>
+</ul>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p><code>EventLoop</code> 类通过事件循环、高效的 I&#x2F;O 多路复用和线程间通知机制，实现了一个高性能、线程安全的事件驱动模型。</p>
+<h3 id="Channel类分析"><a href="#Channel类分析" class="headerlink" title="Channel类分析"></a>Channel类分析</h3><p><code>Channel</code> 类是一个重要的封装类，用于将文件描述符与其对应的事件处理器绑定在一起。它的主要作用是：</p>
+<ol>
+<li><p><strong>管理文件描述符的事件</strong>：如读事件、写事件和连接事件。</p>
+</li>
+<li><p><strong>绑定事件处理函数</strong>：为每个文件描述符注册相应的事件处理函数。</p>
+</li>
+<li><p><strong>与<code>EventLoop</code>协同工作</strong>：在事件发生时，调用相应的处理函数。</p>
+</li>
+</ol>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p><code>Channel</code> 类在项目中主要负责文件描述符的事件管理和处理。它将文件描述符与事件处理函数关联起来，并在事件发生时调用相应的处理函数。<code>Channel</code> 类与<code>EventLoop</code>和<code>Epoll</code>协同工作，形成事件驱动的框架。<code>EventLoop</code> 负责事件循环和事件调度，<code>Epoll</code> 负责高效地监视文件描述符上的事件，而<code>Channel</code> 则负责将文件描述符与事件处理函数绑定，并在事件发生时调用处理函数。</p>
+<p><code>EPOLLIN</code> 表示读事件，即有数据可读；<code>EPOLLET</code> 表示边缘触发模式。边缘触发模式可以减少不必要的事件通知，提高性能。在高并发服务器中，边缘触发模式可以减少系统调用次数，提升效率。</p>
+<h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><p><code>Channel</code> 类是事件驱动框架中的核心组件之一，它将文件描述符与事件处理函数绑定，并在事件发生时调用相应的处理函数。通过与<code>EventLoop</code>和<code>Epoll</code>协同工作，<code>Channel</code> 实现了高效的事件管理和处理。</p>
+<h3 id="Epoll类分析-poller"><a href="#Epoll类分析-poller" class="headerlink" title="Epoll类分析(poller)"></a>Epoll类分析(poller)</h3><p><code>Epoll</code> 类是基于 Linux epoll 接口实现的 I&#x2F;O 多路复用管理器。</p>
+<p>它的主要功能是管理多个文件描述符上的 I&#x2F;O 事件，并将这些事件分发给相应的处理函数。通过使用 <code>epoll</code> 提供的高效事件通知机制，<code>Epoll</code> 类可以在高并发场景下有效地管理和调度大量 I&#x2F;O 请求。</p>
+<h4 id="具体功能"><a href="#具体功能" class="headerlink" title="具体功能"></a>具体功能</h4><ol>
+<li><p><strong>文件描述符管理</strong>：</p>
+<ul>
+<li><code>epoll_add(SP_Channel request, int timeout)</code>：将新的文件描述符添加到 <code>epoll</code> 监视列表中，并设置超时时间。</li>
+<li><code>epoll_mod(SP_Channel request, int timeout)</code>：修改已存在的文件描述符的事件类型。</li>
+<li><code>epoll_del(SP_Channel request)</code>：从 <code>epoll</code> 监视列表中删除文件描述符。</li>
+</ul>
+</li>
+<li><p><strong>事件循环</strong>：</p>
+<ul>
+<li><code>poll()</code>：等待文件描述符上有事件发生，返回有事件的描述符列表。</li>
+</ul>
+</li>
+<li><p><strong>事件处理</strong>：</p>
+<ul>
+<li><code>getEventsRequest(int events_num)</code>：根据事件数量，将发生事件的描述符转换为 <code>Channel</code> 对象，并返回待处理的请求数据。</li>
+</ul>
+</li>
+<li><p><strong>定时器管理</strong>：</p>
+<ul>
+<li><code>add_timer(SP_Channel request_data, int timeout)</code>：为文件描述符设置定时器，超时后自动处理。</li>
+<li><code>handleExpired()</code>：处理所有过期的定时器事件。</li>
+</ul>
+</li>
+</ol>
+<h4 id="Epoll类在EventLoop中的作用"><a href="#Epoll类在EventLoop中的作用" class="headerlink" title="Epoll类在EventLoop中的作用"></a>Epoll类在EventLoop中的作用</h4><p><code>Epoll</code> 类在 <code>EventLoop</code> 中主要承担以下角色：</p>
+<ul>
+<li><strong>事件循环管理器</strong>：负责等待和分发 I&#x2F;O 事件。</li>
+<li><strong>事件分发器</strong>：将 <code>epoll</code> 返回的事件分发给相应的 <code>Channel</code> 进行处理。</li>
+<li><strong>定时器管理</strong>：处理超时事件，确保事件及时处理。</li>
+</ul>
+<p><code>EventLoop</code> 使用 <code>Epoll</code> 类实例 <code>poller_</code> 管理 I&#x2F;O 事件。<code>addToPoller()</code>、<code>updatePoller()</code> 和 <code>removeFromPoller()</code> 方法分别用于向 epoll 中添加、更新和移除事件。<code>loop()</code> 方法中调用 <code>poller_-&gt;poll()</code> 获取触发的事件并处理，每个事件通过相应的 <code>Channel</code> 对象调用其绑定的事件处理函数。</p>
+<h2 id="定时器（Timer类分析，如上）"><a href="#定时器（Timer类分析，如上）" class="headerlink" title="定时器（Timer类分析，如上）"></a>定时器（Timer类分析，如上）</h2><p><code>TimerNode</code> 和 <code>TimerManager</code> 类共同实现了一个定时器机制，用于管理 HTTP 请求的超时处理。</p>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><ol>
+<li><p><strong>管理HTTP请求的生命周期</strong>：通过定时器管理 HTTP 请求的有效期，当请求超时未处理时自动清理。</p>
+</li>
+<li><p><strong>延迟删除机制</strong>：通过延迟删除机制优化性能，避免频繁创建和销毁 HTTP 请求对象。</p>
+</li>
+<li><p><strong>高效的时间管理</strong>：使用优先队列（小根堆）管理定时器节点，确保高效处理定时事件。</p>
+</li>
+</ol>
+<h2 id="线程池-1"><a href="#线程池-1" class="headerlink" title="线程池"></a>线程池</h2><p>线程池的主要目的是提高并发性和效率，通过使用多个线程来执行任务，而不是依赖单个线程来处理所有任务。</p>
+<p>线程池实现了基本的线程管理和任务队列管理功能，能够创建、添加任务、销毁和执行任务。通过使用互斥锁和条件变量，确保线程之间的同步和任务的安全分发。</p>
+<h3 id="EventLoopThreadPool类分析"><a href="#EventLoopThreadPool类分析" class="headerlink" title="EventLoopThreadPool类分析"></a>EventLoopThreadPool类分析</h3><p>事件循环线程池 (<code>EventLoopThreadPool</code>)，用于管理和分配多个事件循环线程 (<code>EventLoopThread</code>)。它的主要功能是创建、启动和管理这些事件循环线程，以实现负载均衡和高效的事件处理。</p>
+<p>管理一组线程，以便在并发执行任务时提高效率。线程池的设计可以避免频繁创建和销毁线程的开销，并且可以通过复用线程来处理多个任务。</p>
+<h4 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h4><ol>
+<li><strong>提高并发处理能力</strong>：线程池能够管理多个线程并行执行任务，提高系统的并发处理能力。</li>
+<li><strong>减少线程创建和销毁的开销</strong>：通过复用线程，减少了频繁创建和销毁线程的开销。</li>
+<li><strong>任务队列管理</strong>：任务可以按需添加到队列中，线程池中的线程会自动从队列中获取任务并执行，简化了任务的调度和管理。</li>
+<li><strong>线程安全</strong>：使用互斥锁和条件变量确保任务队列操作的线程安全，避免竞争条件。</li>
+</ol>
+<h4 id="启动线程池"><a href="#启动线程池" class="headerlink" title="启动线程池"></a>启动线程池</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">EventLoopThreadPool::start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  baseLoop_-&gt;<span class="built_in">assertInLoopThread</span>(); <span class="comment">// 确认该函数在主线程中调用</span></span><br><span class="line">  started_ = <span class="literal">true</span>; <span class="comment">// 标记线程池已启动</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numThreads_; ++i) &#123;</span><br><span class="line">    <span class="function">std::shared_ptr&lt;EventLoopThread&gt; <span class="title">t</span><span class="params">(<span class="keyword">new</span> EventLoopThread())</span></span>; <span class="comment">// 创建新的 EventLoopThread 对象</span></span><br><span class="line">    threads_.<span class="built_in">push_back</span>(t); <span class="comment">// 将线程对象存储到 threads_ 中</span></span><br><span class="line">    loops_.<span class="built_in">push_back</span>(t-&gt;<span class="built_in">startLoop</span>()); <span class="comment">// 启动线程并获取其 EventLoop 对象，将其存储到 loops_ 中</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>确保在主线程中调用。</li>
+<li>标记线程池已启动。</li>
+<li>创建指定数量的 <code>EventLoopThread</code> 线程，启动每个线程并将其 <code>EventLoop</code> 对象存储在 <code>loops_</code> 数组中。</li>
+</ul>
+<h4 id="轮询的方式（round-robin）"><a href="#轮询的方式（round-robin）" class="headerlink" title="轮询的方式（round-robin）"></a>轮询的方式（round-robin）</h4><p>轮询（Round-Robin）是一种常见的调度算法，用于均匀地分配任务或资源。</p>
+<h5 id="轮询的优势"><a href="#轮询的优势" class="headerlink" title="轮询的优势"></a>轮询的优势</h5><ul>
+<li><strong>负载均衡</strong>：通过轮询方式可以确保任务均匀分配到每个线程，避免某个线程过载。</li>
+<li><strong>简单实现</strong>：轮询算法简单且容易实现，不需要复杂的逻辑。</li>
+<li><strong>公平性</strong>：每个 <code>EventLoop</code> 都有平等的机会处理任务，确保资源利用均衡。</li>
+</ul>
+<p>轮询调度是一种简单的调度算法，通过循环方式均匀地分配任务或资源，确保每个任务或资源有平等的机会被处理。在 <code>getNextLoop()</code> 方法中，它用于依次选择 <code>EventLoop</code>，以实现负载均衡。</p>
+<p>使用轮询调度可以确保任务均匀分配到每个 <code>EventLoop</code>，避免某个线程过载，保持系统负载均衡和资源利用均衡。</p>
+<p><code>getNextLoop()</code> 方法通过维护一个索引 <code>next_</code>，每次调用时返回 <code>loops_</code> 中的当前 <code>EventLoop</code>，并更新 <code>next_</code> 指向下一个 <code>EventLoop</code>。当 <code>next_</code> 达到 <code>numThreads_</code> 时，重置为 <code>0</code>，从而实现循环。</p>
+<p>优势是简单易实现，确保任务均匀分配；劣势是在负载不均的情况下，可能无法最优化性能，因为它不考虑每个任务的实际负载和处理时间。</p>
+<h4 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h4><p>这个 <code>EventLoopThreadPool</code> 类的主要功能是：</p>
+<ol>
+<li>管理多个 <code>EventLoopThread</code> 对象。</li>
+<li>启动这些线程并获取它们对应的 <code>EventLoop</code> 对象。</li>
+<li>通过 <code>getNextLoop</code> 方法实现负载均衡，轮询地返回下一个 <code>EventLoop</code> 对象，用于处理新事件。</li>
+</ol>
+<p>这在多线程事件驱动编程中，可以高效地分发和处理事件，提升系统的并发性能。</p>
+<h3 id="EventLoopThread类分析"><a href="#EventLoopThread类分析" class="headerlink" title="EventLoopThread类分析"></a>EventLoopThread类分析</h3><p><code>EventLoopThread</code> 类管理一个单独的线程，在该线程中运行一个 <code>EventLoop</code> 对象。它提供了启动线程和获取 <code>EventLoop</code> 对象的方法，以便在多线程环境中处理事件。<br>其主要功能是启动一个新的线程，在该线程中运行事件循环，并提供线程安全的机制以确保事件循环正确启动。</p>
+<p><code>EventLoopThread</code> 类的主要功能是：</p>
+<ol>
+<li><p>创建一个新的事件循环线程并在该线程中运行事件循环。</p>
+</li>
+<li><p>提供 <code>startLoop</code> 方法启动线程并获取事件循环对象，确保事件循环正确启动。</p>
+</li>
+<li><p>使用互斥锁和条件变量实现线程同步，确保在事件循环对象 <code>loop_</code> 初始化完成前，调用线程处于等待状态。</p>
+</li>
+<li><p>在析构函数中安全退出事件循环并等待线程结束。</p>
+</li>
+</ol>
+<h2 id="Server类分析与总结"><a href="#Server类分析与总结" class="headerlink" title="Server类分析与总结"></a>Server类分析与总结</h2><p><code>Server</code> 类是一个简单的 HTTP 服务器，它的主要功能是接受新连接并处理请求。</p>
+<h3 id="Server-类的主要功能和作用是："><a href="#Server-类的主要功能和作用是：" class="headerlink" title="Server 类的主要功能和作用是："></a><code>Server</code> 类的主要功能和作用是：</h3><ol>
+<li><p><strong>初始化服务器</strong>：创建监听套接字，设置为非阻塞模式，处理 SIGPIPE 信号。</p>
+</li>
+<li><p><strong>启动服务器</strong>：启动线程池，设置监听 Channel 的事件和处理函数，并将 Channel 添加到事件循环中。</p>
+</li>
+<li><p><strong>处理新连接</strong>：接受新连接，设置新连接的属性，将新连接交给线程池中的某个事件循环进行处理。</p>
+</li>
+</ol>
+<h3 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h3><ol>
+<li><strong>接受新连接</strong>：当有新连接到来时，调用 <code>accept</code> 函数接受连接。</li>
+<li><strong>获取线程池中的下一个事件循环</strong>：从线程池中获取一个事件循环，用于处理该新连接。</li>
+<li><strong>设置新连接属性</strong>：将新连接的文件描述符设置为非阻塞模式，并禁用 Nagle 算法。</li>
+<li><strong>创建 <code>HttpData</code> 对象</strong>：为新连接创建一个 <code>HttpData</code> 对象，并将其与 <code>Channel</code> 关联。</li>
+<li><strong>添加到事件循环</strong>：将 <code>HttpData</code> 对象的 <code>newEvent</code> 方法添加到事件循环的任务队列中，等待异步处理。</li>
+</ol>
+<h3 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h3><p>Server&#96; 类是一个简单的 HTTP 服务器，主要负责初始化服务器，启动线程池，接受新连接，并将新连接交给线程池中的某个事件循环进行处理。</p>
+<h2 id="HttpData"><a href="#HttpData" class="headerlink" title="HttpData"></a>HttpData</h2><ol>
+<li><p><strong>封装连接处理逻辑</strong>：<code>HttpData</code> 对象封装了与 HTTP 请求和响应相关的所有逻辑。这样可以将连接处理的各个部分（如读取请求、解析请求、生成响应、发送响应等）组织在一起，使代码更清晰和模块化。</p>
+</li>
+<li><p><strong>管理连接状态</strong>：每个连接都有其状态（如读取请求、发送响应等），<code>HttpData</code> 对象可以维护和管理这些状态。同时，<code>HttpData</code> 对象还可以保存一些与连接相关的资源，如文件描述符、缓冲区等。</p>
+</li>
+<li><p>**关联 <code>Channel</code>**：每个连接都需要一个 <code>Channel</code> 来监控其 I&#x2F;O 事件，<code>HttpData</code> 对象可以持有并管理这个 <code>Channel</code>。通过 <code>Channel</code>，可以方便地注册和处理该连接的读写事件。</p>
+</li>
+<li><p><strong>生命周期管理</strong>：通过智能指针来管理 <code>HttpData</code> 对象，可以方便地控制其生命周期，避免内存泄漏。当连接关闭或超时后，<code>HttpData</code> 对象会自动销毁，释放相关资源。</p>
+</li>
+<li><p><strong>异步任务处理</strong>：在多线程环境中，<code>HttpData</code> 对象可以被安全地传递给其他线程处理。在 <code>Server::handNewConn</code> 中，将 <code>HttpData</code> 对象添加到线程池中的事件循环，可以实现异步处理，从而提高服务器的并发能力。</p>
+</li>
+</ol>
+<h2 id="Nagle-算法"><a href="#Nagle-算法" class="headerlink" title="Nagle 算法"></a>Nagle 算法</h2><p>禁用 Nagle 算法的目的是为了降低网络延迟，提高实时通信的效率。以下是详细解释：</p>
+<h3 id="什么是-Nagle-算法"><a href="#什么是-Nagle-算法" class="headerlink" title="什么是 Nagle 算法"></a>什么是 Nagle 算法</h3><p>Nagle 算法是一种用于优化网络数据传输的算法，主要用于减少小包传输的数量，从而减少网络拥塞。它的工作原理是，将小数据包积累起来，直到有足够多的数据或者收到一个确认包（ACK）后再进行发送。</p>
+<h3 id="禁用-Nagle-算法的原因"><a href="#禁用-Nagle-算法的原因" class="headerlink" title="禁用 Nagle 算法的原因"></a>禁用 Nagle 算法的原因</h3><p>在某些网络应用中，特别是实时性要求高的应用，禁用 Nagle 算法可以带来以下好处：</p>
+<ol>
+<li><p><strong>降低延迟</strong>：</p>
+<ul>
+<li>实时通信应用（如在线游戏、即时通讯、视频会议等）通常需要尽快将数据发送给对方，而不是等待数据积累到一定量再发送。如果启用了 Nagle 算法，数据包可能会被延迟发送，从而增加网络延迟。</li>
+</ul>
+</li>
+<li><p><strong>提高数据传输的实时性</strong>：</p>
+<ul>
+<li>对于需要实时响应的应用，禁用 Nagle 算法可以确保数据包立即发送，提高数据传输的实时性。这样可以使客户端和服务器之间的交互更加迅速，响应更加及时。</li>
+</ul>
+</li>
+<li><p><strong>改善小包传输性能</strong>：</p>
+<ul>
+<li>某些应用场景下，数据包通常较小且频繁发送。在这种情况下，禁用 Nagle 算法可以避免数据包在发送缓冲区中积累，从而提高传输效率和响应速度。</li>
+</ul>
+</li>
+</ol>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>禁用 Nagle 算法通常适用于以下场景：</p>
+<ul>
+<li><strong>在线游戏</strong>：游戏中的动作和状态变化需要尽快传递给服务器和其他玩家，以保持游戏的同步性和流畅性。</li>
+<li><strong>即时通讯</strong>：聊天消息和状态更新需要立即发送和接收，以提供良好的用户体验。</li>
+<li><strong>实时音视频通信</strong>：语音和视频数据需要以最低延迟发送，以保证通信的实时性和清晰度。</li>
+</ul>
+<h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><p>条件变量（Condition Variable）是用于多线程编程中的一种同步原语，它允许线程在某个条件不满足时进入等待状态，并在条件满足时被唤醒，从而实现线程之间的协调和同步。条件变量通常与互斥锁（Mutex）一起使用，以保证对共享资源的访问是线程安全的。</p>
+<h3 id="条件变量的基本操作"><a href="#条件变量的基本操作" class="headerlink" title="条件变量的基本操作"></a>条件变量的基本操作</h3><p>条件变量主要有以下几个基本操作：</p>
+<ol>
+<li><p><strong>等待操作（Wait）</strong>：</p>
+<ul>
+<li>当某个条件不满足时，线程可以调用条件变量的等待操作进入等待状态。等待操作通常是原子的，即线程在释放互斥锁并进入等待状态的过程是不可中断的。</li>
+<li>例如：<code>pthread_cond_wait(&amp;cond, &amp;mutex);</code></li>
+<li>在调用<code>pthread_cond_wait</code>之前，线程必须持有与条件变量相关联的互斥锁。调用<code>pthread_cond_wait</code>后，线程会释放互斥锁并进入等待状态，直到被唤醒。</li>
+</ul>
+</li>
+<li><p><strong>唤醒操作（Signal&#x2F;Broadcast）</strong>：</p>
+<ul>
+<li>当条件满足时，线程可以调用条件变量的唤醒操作唤醒一个或多个等待该条件的线程。</li>
+<li>例如：<code>pthread_cond_signal(&amp;cond);</code>（唤醒一个等待线程）</li>
+<li>例如：<code>pthread_cond_broadcast(&amp;cond);</code>（唤醒所有等待线程）</li>
+<li>唤醒操作会通知等待在条件变量上的一个或多个线程，通知它们条件已经满足，可以继续执行。</li>
+</ul>
+</li>
+</ol>
+<h4 id="条件变量的使用场景"><a href="#条件变量的使用场景" class="headerlink" title="条件变量的使用场景"></a>条件变量的使用场景</h4><p>条件变量通常用于以下场景：</p>
+<ol>
+<li><p><strong>生产者-消费者模型</strong>：</p>
+<ul>
+<li>在生产者-消费者模型中，生产者线程向缓冲区添加数据，消费者线程从缓冲区取数据。条件变量可以用于实现生产者和消费者之间的同步。</li>
+<li>当缓冲区为空时，消费者线程进入等待状态；当缓冲区不为空时，生产者线程通知等待的消费者线程。</li>
+</ul>
+</li>
+<li><p><strong>任务队列</strong>：</p>
+<ul>
+<li>在线程池或任务队列中，工作线程从任务队列中取任务执行。当任务队列为空时，工作线程进入等待状态；当有新任务添加到队列时，通知等待的工作线程继续执行。</li>
+</ul>
+</li>
+<li><p><strong>事件等待</strong>：</p>
+<ul>
+<li>当某个事件需要等待另一个事件的完成时，可以使用条件变量。例如，一个线程等待另一个线程完成初始化工作后再继续执行。</li>
+</ul>
+</li>
+</ol>
+<h2 id="线程复用（如上，线程池）"><a href="#线程复用（如上，线程池）" class="headerlink" title="线程复用（如上，线程池）"></a>线程复用（如上，线程池）</h2><p>线程池中的线程复用是通过创建一组线程并将它们保持在等待状态，当有任务需要执行时，线程池将任务分配给这些线程来执行。线程完成任务后，不会终止，而是继续等待下一个任务，这样就实现了线程的复用。</p>
+<p>以下是线程池中线程复用的实现机制：</p>
+<h4 id="线程池的核心组成部分"><a href="#线程池的核心组成部分" class="headerlink" title="线程池的核心组成部分"></a>线程池的核心组成部分</h4><ol>
+<li><p><strong>线程池管理器</strong>：</p>
+<ul>
+<li>负责创建和管理线程池中的线程。</li>
+<li>维护一个任务队列，当有新任务提交时，将任务放入队列中。</li>
+</ul>
+</li>
+<li><p><strong>工作线程</strong>：</p>
+<ul>
+<li>线程池中的线程通常称为工作线程。</li>
+<li>工作线程在创建后进入一个循环，不断从任务队列中取任务执行。</li>
+</ul>
+</li>
+<li><p><strong>任务队列</strong>：</p>
+<ul>
+<li>存储需要执行的任务。</li>
+<li>任务队列通常是一个线程安全的队列，使用互斥锁和条件变量来实现线程安全的访问。</li>
+</ul>
+</li>
+</ol>
+<h4 id="线程池中的线程复用过程"><a href="#线程池中的线程复用过程" class="headerlink" title="线程池中的线程复用过程"></a>线程池中的线程复用过程</h4><ol>
+<li><p><strong>线程池初始化</strong>：</p>
+<ul>
+<li>创建指定数量的工作线程，并将它们放入等待状态。</li>
+</ul>
+</li>
+<li><p><strong>提交任务</strong>：</p>
+<ul>
+<li>当有新任务提交时，将任务放入任务队列中，并通知等待的工作线程有新任务可执行。</li>
+</ul>
+</li>
+<li><p><strong>工作线程执行任务</strong>：</p>
+<ul>
+<li>工作线程从任务队列中取任务执行，执行完成后继续等待下一个任务。</li>
+</ul>
+</li>
+<li><p><strong>线程复用</strong>：</p>
+<ul>
+<li>线程完成任务后不退出，而是继续等待任务队列中的新任务，这样实现了线程的复用。</li>
+</ul>
+</li>
+</ol>
+<h1 id="客户端分析-HTTPClient"><a href="#客户端分析-HTTPClient" class="headerlink" title="客户端分析 HTTPClient"></a>客户端分析 HTTPClient</h1><p>一个简单的客户端程序，用于向服务器发送 HTTP 请求并接收响应。</p>
+<ol>
+<li><strong>创建套接字并连接到服务器</strong>：程序使用不同的 HTTP 请求数据与服务器进行通信。</li>
+<li><strong>非阻塞套接字</strong>：通过设置套接字为非阻塞模式，避免读写操作阻塞程序的执行。</li>
+<li><strong>发送 HTTP 请求</strong>：程序分别发送三种不同的 HTTP 请求数据，观察服务器的响应。</li>
+<li><strong>接收服务器响应</strong>：读取服务器返回的数据并打印输出。</li>
+</ol>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="argc-参数-和-argv-参数"><a href="#argc-参数-和-argv-参数" class="headerlink" title="argc 参数 和 argv 参数"></a>argc 参数 和 argv 参数</h2><p>在C&#x2F;C++程序中，main函数是程序的入口点，int main(int argc, char *argv[]) 是其标准签名之一，其中包含两个参数：argc 和 argv。</p>
+<p>argc 参数<br>argc 是一个整数，表示命令行参数的个数。argc 的值至少为1，因为第一个参数总是程序的名称。</p>
+<p>argv 参数<br>argv 是一个指向字符指针的指针数组（通常解释为字符串数组）。它包含了命令行输入的参数，每个参数是一个C风格的字符串。argv[0] 是程序的名称或路径，而 argv[1] 到 argv[argc-1] 是命令行传递的其他参数。</p>
+<h2 id="选项字符串的语法"><a href="#选项字符串的语法" class="headerlink" title="选项字符串的语法"></a>选项字符串的语法</h2><p>选项字符串中的每个字符表示一个选项。如果一个字符后跟一个冒号（:），则表示该选项需要一个参数。如果没有冒号，则表示该选项不需要参数。</p>
+<p>const char *str &#x3D; “t:l:p:”; 的含义<br>在这句代码中，选项字符串 str 被设置为 “t:l:p:”，这意味着 getopt 函数将会解析三个选项：</p>
+<p>t：需要一个参数。<br>l：需要一个参数。<br>p：需要一个参数。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://lejunxts.github.io">一颗流浪小石头</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://lejunxts.github.io/posts/571cb353.html">http://lejunxts.github.io/posts/571cb353.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://lejunxts.github.io" target="_blank">比宇宙更加遥远的地方</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/fulilian2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/ce15e2e9.html" title="全栈即时通讯心得"><img class="cover" src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">全栈即时通讯心得</div></div></a></div><div class="next-post pull-right"><a href="/posts/32d9f9cf.html" title="设计模式"><img class="cover" src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">设计模式</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Gitalk</span><span id="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">一颗流浪小石头</div><div class="author-info__description">总有一天，要在那里看到星星！</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lejunXTS"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/lejunXTS" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.bilibili.com/" target="_blank" title="bilibili"><i class="fab fa-bilibili"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">循此苦旅，以达繁星</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WebServer%E7%AE%80%E4%BB%8B%E5%92%8C%E5%8A%9F%E8%83%BD%E6%A2%B3%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">WebServer简介和功能梳理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84WebServer"><span class="toc-number">1.2.</span> <span class="toc-text">实现一个简单的WebServer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%85%85"><span class="toc-number">1.3.</span> <span class="toc-text">扩充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">1.3.3.</span> <span class="toc-text">线程池</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF"><span class="toc-number">3.</span> <span class="toc-text">一些错误</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%84%9A%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">构建脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="toc-number">4.1.</span> <span class="toc-text">1. 设置变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%B0%E6%9E%84%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">4.2.</span> <span class="toc-text">2. 创建并切换到构建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%9F%E6%88%90%E6%9E%84%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">3. 生成构建文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BC%96%E8%AF%91%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="toc-number">4.4.</span> <span class="toc-text">4. 编译源代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BE%93%E5%87%BA"><span class="toc-number">4.5.</span> <span class="toc-text">编译输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake-%E9%85%8D%E7%BD%AE"><span class="toc-number">4.5.1.</span> <span class="toc-text">CMake 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number">4.5.2.</span> <span class="toc-text">编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A%E4%BF%A1%E6%81%AF"><span class="toc-number">4.5.3.</span> <span class="toc-text">警告信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.6.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">总体结构分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%85%B7%E4%BD%93%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">6.</span> <span class="toc-text">服务端具体功能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.1.</span> <span class="toc-text">并发模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoop%E7%B1%BB%E5%88%86%E6%9E%90%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">6.1.1.</span> <span class="toc-text">EventLoop类分析与总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%8A%9F%E8%83%BD%E5%92%8C%E4%BD%9C%E7%94%A8"><span class="toc-number">6.1.1.1.</span> <span class="toc-text">具体功能和作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E7%AE%A1%E7%90%86"><span class="toc-number">6.1.1.2.</span> <span class="toc-text">事件循环管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="toc-number">6.1.1.3.</span> <span class="toc-text">事件通知机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6"><span class="toc-number">6.1.1.4.</span> <span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">6.1.1.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channel%E7%B1%BB%E5%88%86%E6%9E%90"><span class="toc-number">6.1.2.</span> <span class="toc-text">Channel类分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">6.1.2.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-number">6.1.2.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Epoll%E7%B1%BB%E5%88%86%E6%9E%90-poller"><span class="toc-number">6.1.3.</span> <span class="toc-text">Epoll类分析(poller)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%8A%9F%E8%83%BD"><span class="toc-number">6.1.3.1.</span> <span class="toc-text">具体功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Epoll%E7%B1%BB%E5%9C%A8EventLoop%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">6.1.3.2.</span> <span class="toc-text">Epoll类在EventLoop中的作用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%88Timer%E7%B1%BB%E5%88%86%E6%9E%90%EF%BC%8C%E5%A6%82%E4%B8%8A%EF%BC%89"><span class="toc-number">6.2.</span> <span class="toc-text">定时器（Timer类分析，如上）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">6.2.1.</span> <span class="toc-text">主要功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0-1"><span class="toc-number">6.3.</span> <span class="toc-text">线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoopThreadPool%E7%B1%BB%E5%88%86%E6%9E%90"><span class="toc-number">6.3.1.</span> <span class="toc-text">EventLoopThreadPool类分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8-1"><span class="toc-number">6.3.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">6.3.1.2.</span> <span class="toc-text">启动线程池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%88round-robin%EF%BC%89"><span class="toc-number">6.3.1.3.</span> <span class="toc-text">轮询的方式（round-robin）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">6.3.1.3.1.</span> <span class="toc-text">轮询的优势</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-3"><span class="toc-number">6.3.1.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoopThread%E7%B1%BB%E5%88%86%E6%9E%90"><span class="toc-number">6.3.2.</span> <span class="toc-text">EventLoopThread类分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Server%E7%B1%BB%E5%88%86%E6%9E%90%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">6.4.</span> <span class="toc-text">Server类分析与总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Server-%E7%B1%BB%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E5%92%8C%E4%BD%9C%E7%94%A8%E6%98%AF%EF%BC%9A"><span class="toc-number">6.4.1.</span> <span class="toc-text">Server 类的主要功能和作用是：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%B5%81%E7%A8%8B"><span class="toc-number">6.4.2.</span> <span class="toc-text">主要流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-4"><span class="toc-number">6.4.3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HttpData"><span class="toc-number">6.5.</span> <span class="toc-text">HttpData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nagle-%E7%AE%97%E6%B3%95"><span class="toc-number">6.6.</span> <span class="toc-text">Nagle 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Nagle-%E7%AE%97%E6%B3%95"><span class="toc-number">6.6.1.</span> <span class="toc-text">什么是 Nagle 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%81%E7%94%A8-Nagle-%E7%AE%97%E6%B3%95%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">6.6.2.</span> <span class="toc-text">禁用 Nagle 算法的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">6.6.3.</span> <span class="toc-text">应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="toc-number">6.7.</span> <span class="toc-text">条件变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">6.7.1.</span> <span class="toc-text">条件变量的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">6.7.1.1.</span> <span class="toc-text">条件变量的使用场景</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8%EF%BC%88%E5%A6%82%E4%B8%8A%EF%BC%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%89"><span class="toc-number">6.8.</span> <span class="toc-text">线程复用（如上，线程池）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">6.8.0.1.</span> <span class="toc-text">线程池的核心组成部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">6.8.0.2.</span> <span class="toc-text">线程池中的线程复用过程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%86%E6%9E%90-HTTPClient"><span class="toc-number">7.</span> <span class="toc-text">客户端分析 HTTPClient</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">8.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#argc-%E5%8F%82%E6%95%B0-%E5%92%8C-argv-%E5%8F%82%E6%95%B0"><span class="toc-number">8.1.</span> <span class="toc-text">argc 参数 和 argv 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">8.2.</span> <span class="toc-text">选项字符串的语法</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/308b9800.html" title="pytorch一键导出环境"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pytorch一键导出环境"/></a><div class="content"><a class="title" href="/posts/308b9800.html" title="pytorch一键导出环境">pytorch一键导出环境</a><time datetime="2024-05-16T14:19:54.000Z" title="发表于 2024-05-16 22:19:54">2024-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7f1ae6d2.html" title="java"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java"/></a><div class="content"><a class="title" href="/posts/7f1ae6d2.html" title="java">java</a><time datetime="2024-04-29T01:51:22.000Z" title="发表于 2024-04-29 09:51:22">2024-04-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/593dfc4f.html" title="后端项目3"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端项目3"/></a><div class="content"><a class="title" href="/posts/593dfc4f.html" title="后端项目3">后端项目3</a><time datetime="2024-02-29T05:16:44.000Z" title="发表于 2024-02-29 13:16:44">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2e3accd9.html" title="后端项目2"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端项目2"/></a><div class="content"><a class="title" href="/posts/2e3accd9.html" title="后端项目2">后端项目2</a><time datetime="2024-02-29T05:16:39.000Z" title="发表于 2024-02-29 13:16:39">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b7339d63.html" title="Git"><img src="/img/loading.gif" data-original="/img/fulilian2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/posts/b7339d63.html" title="Git">Git</a><time datetime="2024-02-29T05:16:34.000Z" title="发表于 2024-02-29 13:16:34">2024-02-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 一颗流浪小石头</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
   const initGitalk = () => {
     const gitalk = new Gitalk(Object.assign({
       clientID: 'bbc2c3798eb9cb61d3f7',
@@ -191,7 +584,7 @@
   const disqus_config = function () {
     this.page.url = 'http://lejunxts.github.io/posts/571cb353.html'
     this.page.identifier = '/posts/571cb353.html'
-    this.page.title = '嵌入式项目1'
+    this.page.title = 'webserver'
   }
 
   const disqusReset = () => {
