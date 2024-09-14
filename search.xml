@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>协程库</title>
+      <link href="/posts/2e3accd9.html"/>
+      <url>/posts/2e3accd9.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="协程基础知识"><a href="#协程基础知识" class="headerlink" title="协程基础知识"></a>协程基础知识</h1><p>协程是⼀种“轻量级线程”，用户态线程”</p><p>每个协程在创建时都会指定⼀个入口函数，这点可以类比线程。协程的本质就是函数和函数运行状态的组合 。</p><p>协程和函数的不同之处是，函数⼀旦被调用，只能从头开始执行，直到函数执⾏结束退出，⽽协程则可以执⾏到⼀半就退出（称为yield），但此时协程并未真正结束，只是暂时让出CPU执⾏权，在后⾯适当的时机协程可以重新恢复运⾏（称为resume），在这段时间⾥其他的协程可以获得CPU并运⾏，所以协程被描述称为“轻量级线程”</p><p>协程能够半路yield、再重新resume的关键是协程存储了函数在yield时间点的执⾏状态，这个状态称为协程上下⽂</p><p>协程上下⽂包含了函数在当前执⾏状态下的全部CPU寄存器的值，这些寄存器值记录了函数栈帧、代码的执⾏位置等信息，如果将这些寄存器的值重新设置给CPU，就相当于重新恢复了函数的运⾏。单线程环境下，协程的yield和resume⼀定是同步进⾏的，⼀个协程的yield，必然对应另⼀个协程的resume，因为线程不可能没有执⾏主体。并且，协程的yield和resume是完全由应⽤程序来控制的。与线程不同，线程创建之后，线程的运⾏和调<br>度也是由操作系统⾃动完成的，但协程创建后，协程的运⾏和调度都要由应⽤程序来完成，就和调⽤函数⼀样，所以协程也被称为“⽤户态线程”。</p><h2 id="对称协程与非对称协程"><a href="#对称协程与非对称协程" class="headerlink" title="对称协程与非对称协程"></a>对称协程与非对称协程</h2><p>对称协程，协程可以不受限制地将控制权交给任何其他协程。任何⼀个协程都是相互独⽴且平等的，调度权可以在任意协程之间转移</p><p>CoroutineA，CoroutineB，CoroutineC之间是可以通过<strong>协程调度器</strong>可以切换到任意协程</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> c++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>pytorch一键导出环境</title>
       <link href="/posts/308b9800.html"/>
       <url>/posts/308b9800.html</url>
@@ -67,31 +92,6 @@
           
       </categories>
       
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>协程库</title>
-      <link href="/posts/2e3accd9.html"/>
-      <url>/posts/2e3accd9.html</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="协程基础知识"><a href="#协程基础知识" class="headerlink" title="协程基础知识"></a>协程基础知识</h1><p>协程是⼀种“轻量级线程”，用户态线程”</p><p>每个协程在创建时都会指定⼀个入口函数，这点可以类比线程。协程的本质就是函数和函数运行状态的组合 。</p><p>协程和函数的不同之处是，函数⼀旦被调用，只能从头开始执行，直到函数执⾏结束退出，⽽协程则可以执⾏到⼀半就退出（称为yield），但此时协程并未真正结束，只是暂时让出CPU执⾏权，在后⾯适当的时机协程可以重新恢复运⾏（称为resume），在这段时间⾥其他的协程可以获得CPU并运⾏，所以协程被描述称为“轻量级线程”</p><p>协程能够半路yield、再重新resume的关键是协程存储了函数在yield时间点的执⾏状态，这个状态称为协程上下⽂</p><p>协程上下⽂包含了函数在当前执⾏状态下的全部CPU寄存器的值，这些寄存器值记录了函数栈帧、代码的执⾏位置等信息，如果将这些寄存器的值重新设置给CPU，就相当于重新恢复了函数的运⾏。单线程环境下，协程的yield和resume⼀定是同步进⾏的，⼀个协程的yield，必然对应另⼀个协程的resume，因为线程不可能没有执⾏主体。并且，协程的yield和resume是完全由应⽤程序来控制的。与线程不同，线程创建之后，线程的运⾏和调<br>度也是由操作系统⾃动完成的，但协程创建后，协程的运⾏和调度都要由应⽤程序来完成，就和调⽤函数⼀样，所以协程也被称为“⽤户态线程”。</p><h2 id="对称协程与非对称协程"><a href="#对称协程与非对称协程" class="headerlink" title="对称协程与非对称协程"></a>对称协程与非对称协程</h2><p>对称协程，协程可以不受限制地将控制权交给任何其他协程。任何⼀个协程都是相互独⽴且平等的，调度权可以在任意协程之间转移</p><p>CoroutineA，CoroutineB，CoroutineC之间是可以通过<strong>协程调度器</strong>可以切换到任意协程</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> c++ </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 项目 </tag>
-            
-        </tags>
       
     </entry>
     
